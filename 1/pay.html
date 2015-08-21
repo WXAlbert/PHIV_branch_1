@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title>车辆抵押标的</title>
+        <link rel="stylesheet" type="text/css" href="css/init-mobi.css"/>
+        <link rel="stylesheet" type="text/css" href="css/resources.css"/>
+        <style>
+            body{background-color: #f5f5f5;}
+        	/*导航*/
+            .xc-bar-nav{}
+            .xc-bar-nav .xc-title{font-size: 1.2em; top: 0; height: 44px; line-height: 44px; color: #fff;}
+
+            .xc-pull-left{font-size: 1.2em; margin-left: 10px;}
+            .xc-pull-left .xc-icon{display: inline-block; width: 1.2em; height: 1.2em;}
+            .xc-pull-left .xc-nav-label{color: #fff;}
+
+            /*内容区域*/
+            .xc-container{ /*padding-top: 44px; padding-bottom: 44px;*/ overflow: hidden;}
+            .xc-control-content{padding: 10px; background-color: #fff;}
+            .xc-control-content  .xc-icon-txt{margin: 5px 0;}
+            .xc-icon-txt .xc-icon{display: inline-block; vertical-align: middle;}
+            .xc-icon-txt .xc-label{margin: 0 5px;}
+            .xc-icon-label{padding: 10px;}
+            .icon-car, .icon-clock, .icon-coin, .icon-profit{width: 1em; height: 1em;}
+            .section-title {margin: 1em 0;}
+            .section-content{padding:8px 0; border-top: solid 1px #e7e7e7;}
+            #protocol{margin-top: 6px; padding: 2px 5px; border: solid 1px #929292; border-radius: 3px;}
+            #protocol:active{background-color: #ccc !important;}
+            .row-block{margin-top: 5px; padding: 0 10px;}
+
+            .select-wrap{padding: 0.5em 1em; border: solid 1px #dedede; border-radius: 5px;}
+            .select-wrap input{width: 100%;}
+            .select-group{font-size: 1.2em; display: block; width: 100%; border: none; background: none;}
+            .select-group:focus{outline: none;}
+
+            /* 底部控制栏 */
+            .xc-bar-control{margin-top: 1em; padding: 5px 10px; border-top: solid 1px #e7e7e7; background-color: #f5f5f5;}
+            .control-btn{display: block; height: 32px; line-height: 32px; text-align: center; color: #fff; background-color: #F64A4A;}
+            .control-btn:link{color: #fff;}
+            .control-btn:visited{color: #fff;}
+            .control-btn:active{background-color: #d63A3A;}
+
+            .block-20{height: 20px;}
+        </style>
+	</head>
+	<body>
+	    <!--<header id="topBar" class="xc-bar xc-bar-nav bg-black">
+            <a class="xc-btn-nav xc-pull-left" href="javascript:history.back();">
+                <i class="xc-icon icon-arrow-left"></i>
+                <span class="xc-nav-label" style="display: none;">车辆抵押标的</span>
+            </a>
+            <div class="xc-title" style="display: block;">
+                车辆抵押标的
+            </div>
+        </header>-->
+
+        <div class="xc-container">
+             <p class="xc-icon-label ">
+                <i class="xc-icon icon-car"></i><span class="xc-label">确认购买信息：</span>
+            </p>
+            <div class="xc-control-content">
+                <section>
+                    <span class="fr">期限3个月</span>
+                    <h3 class="section-title">车辆抵押标的18%</h3>
+                    <div class="section-content">
+                         <div class="xc-icon-txt">
+                            <i class="xc-icon icon-clock"></i><span class="xc-label">投资日期：2015.8.20</span>
+                        </div>
+                        <div class="xc-icon-txt">
+                            <i class="xc-icon icon-coin"></i><span class="xc-label">投资金额：￥1000</span>
+                        </div>
+                        <div class="xc-icon-txt">
+                            <i class="xc-icon icon-profit"></i><span class="xc-label">到期收益：￥1140</span>
+                        </div>
+                    </div>
+                    <a id="protocol" class="fr" href="#">查看协议范本</a>
+                    <div class="section-content">
+                        <span>还款方式：一次性还本付息</span>
+                    </div>
+                </section>
+            </div>
+            <div class="block-20"></div>
+            <div class="xc-control-content">
+                <div class="select-wrap">
+                    <select class="select-group" id="pay_attach" name="pay_attach">
+                        <option value=1>选择红包或加息券</option>
+                        <option value=2>选择红包或加息券</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row-block">
+                <span class="label">减免：￥122</span>
+            </div>
+            <div class="row-block">
+                 <span>支付金额：￥1000</span>
+            </div>
+        </div>
+
+         <footer class="xc-bar xc-bar-control">
+            <a id="pay_btn" class="control-btn" href="#">支付</a>
+        </footer>
+
+        <script src="js/jq.mobi.min.js"></script>
+        <script>
+            $(function(){
+                var $payBtn = $("#pay_btn"),
+                    $payAttach = $("#pay_attach");
+                init();
+
+                function init(){
+                    bind();
+                }
+
+                function bind(){
+                    $payBtn.bind('click', function(){
+                        $.ajax({
+                        	type: "post",
+                        	url: "",
+                        	data: {
+                        	    pay_attach: $payAttach.val()
+                        	}
+                        });
+                    });
+                }
+            });
+        </script>
+	</body>
+</html>

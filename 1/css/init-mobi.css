@@ -35,6 +35,8 @@ html,body{height: 100%;}
 .ft-b{font-weight: bold;}
 .ft-red{color: #ff7167;}
 .ft-blue{color: #0066cc;}
+
+.bg-black{background-color: #29323e;}
 /*********************** "css  "xc-" common" ***********************/
 .xc-icon{background-repeat: no-repeat; background-position: center; background-size: cover;}
 .xc-progress-bar{width: 100%; height: 8px; border-radius: 5px; overflow: hidden;}
