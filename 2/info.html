@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>中普投资</title>
+		<link rel="stylesheet" type="text/css" href="css/init-mobi.css"/>
+		<link rel="stylesheet" type="text/css" href="css/resources.css"/>
+<!--		<link rel="stylesheet" type="text/css" href="js/iscroll/scrollbar.css"/>-->
+		<style>
+			body{height: auto; background-color: #29323e;}
+
+			/*导航*/
+			.xc-bar-nav{}
+			.xc-bar-nav .xc-title{font-size: 1.2em; top: 0; height: 44px; line-height: 44px; color: #fff;}
+
+			.xc-pull-left{font-size: 1.2em; margin-left: 10px;}
+			.xc-pull-left .xc-icon{display: inline-block; width: 1.2em; height: 1.2em;}
+			.xc-pull-left .xc-nav-label{color: #fff;}
+			.xc-container{ /*padding-top: 44px; padding-bottom: 44px;*/ overflow: hidden;}
+			.xc-bar-control{margin-top: 1em; padding: 5px 10px; border-top: solid 1px #e7e7e7; background-color: #fff;}
+
+			/* container */
+			#yield{margin: 0 auto 1em; width: 12em; height: 12em; position: relative; color: #fff;}
+			#yield  canvas{width: 100%; height: 100%; position: absolute; left: 0; top: 0;}
+			#yield .para-v{font-size: 3em; padding: 1.2em 1em 0; text-align: center;}
+			#yield .para-v b{font-size: 0.5em;}
+			#yield .para-k{font-size: 0.8em; padding: 0 2em;  text-align: center;}
+			#yield .para-k .xc-icon{width: 1em; height: 1em; display: inline-block; vertical-align: middle;}
+			#yield .para-k .label{vertical-align: middle}
+
+			#para{display: table; width: 100%;}
+			#para .para-group{display: table-cell; width: 33.33%; text-align: center;}
+			#para .para-v span, .para-k{font-size: 0.8em;}
+			#para .para-k{color: #8fc21f;}
+
+			#progress{margin:  0 10px; padding: 1em 0; border-bottom: solid 1px #e7e7e7; overflow: hidden;}
+			#progress .rate{text-align: right;}
+			#progress .xc-progress-bar{margin: 10px 0; height: 8px; border-radius: 5px; background-color: #0097c9;}
+			#progress .xc-progress-bar b{background-color: #ddd;}
+			#progress .para-k{color: #929292;}
+
+			#remark{font-size: 0.8em; margin: 1em 10px;}
+			#remark .label{color: #929292;}
+			#protocol{padding: 0.2em 0.5em; border: solid 1px #929292; border-radius: 3px;}
+			#protocol.act{background-color: #ccc !important;}
+
+			/* 底部控制栏 */
+			.control-btn{display: block; height: 32px; line-height: 32px; text-align: center; color: #fff; background-color: #F64A4A;}
+			.control-btn:link{color: #fff;}
+			.control-btn:visited{color: #fff;}
+			.control-btn:active{background-color: #d63A3A;}
+
+			/* iscroll插件 listview样式 */
+			#scroller_wrapper {position:absolute; z-index:1; top: 0; bottom: 40px; width:100%; overflow:auto;}
+			#scroller {position:relative; -webkit-touch-callout:none; -webkit-tap-highlight-color:rgba(0,0,0,0); float:left; width:100%; padding:0;}
+			#scroller .list-view {position:relative; list-style:none; width:100%; text-align:left;}
+			#scroller .list-item{padding: 40px 0;}
+			#pullUp, #pullDown{width: 12em; margin: 0 auto; line-height: none; background: none; border: none; text-align: center;}
+			/* iscroll插件 listview样式 end*/
+
+            .list-item{overflow: hidden; padding-bottom: 40px;}
+			#product_info{padding-top: 40px; background:-webkit-linear-gradient(top, #8fc21f,  #8fc21f  32%, #fff 60%); background-repeat:no-repeat;}
+			#buy_info.list-item{/*margin-top: 40px; */padding-top: 0; background-color: #fff;}
+
+			.xc-container{padding-bottom: 44px;}
+			.xc-table-view-cell{padding: 0; border-top: solid 2px #8fc21f; border-bottom: solid 10px #f5f5f5;}
+			.xc-bar-tab{border-top: solid 1px #8fc21f; background-color: #fff;}
+
+			/* nav */
+			.topbar{height: auto; padding: 10px; background-color: #f5f5f5;}
+			#nav{display: table; width: 100%; border: solid 2px #8fc21f; border-radius: 3px;}
+			#nav li{display:table-cell;}
+			#nav li a{display: block; height: 2em; line-height: 2em; text-align:center; color: #8fc21f; overflow:hidden;}
+			#nav li a:hover{text-decoration: none; color:#dedede;}
+			#nav li.xc-current a{background:#8fc21f; color:#fff;}
+
+			/*选项卡切换显示页*/
+			.xc-control-content{padding: 10px;}
+			.icon-protect, .icon-person{width: 1em; height: 1em;}
+			.section-title{margin: 1em 0;}
+			.section-content{padding: 1em 0; min-height: 6em; border-top: solid 1px #e7e7e7;}
+			.person-info{margin: 0.5em 0; width: 100%;}
+			.report-table{width: 100%; border: solid 1px #e5e5e5; text-align: center;}
+			.report-table tr, .report-table tr{height: 2.5em; line-height: 2.5em;}
+			.report-table th{background-color: #f1f1f1;}
+			.report-table tr:nth-child(odd){background-color: #fcfcfc;}
+
+			/*购买页弹出层*/
+			#slideForm{display: none; padding: 10px; border-top: solid 2px #8FC21F; position: fixed; left: 0; right: 0; bottom: 0; z-index: 11; background-color: #fff;}
+			.xc-input-wrap{margin-left: 8em;}
+
+            .input-count{}
+			.btn-plus, .btn-minus{font-size: 1.5em; margin: 0 5px; width: 1em; height: 1em; line-height: 0.8em; text-align: center; background-color: #C9C9C9; color: #fff;}
+			.input-wrap{margin: 0 calc(1.6em + 10px);}
+			#number{text-align: center;}
+		</style>
+	</head>
+
+	<body>
+		<!--<header id="topBar" class="xc-bar xc-bar-nav">
+			<a class="xc-btn-nav xc-pull-left" href="javascript:history.back();">
+				<i class="xc-icon icon-arrow-left"></i>
+				<span class="xc-nav-label">车辆抵押标的</span>
+			</a>
+			<div class="xc-title" style="display: none;">
+				车辆抵押标的
+			</div>
+		</header>-->
+
+                <ul id="listView" class="list-view">
+                        <li id="product_info" class="list-item">
+                            <div id="yield" class="para-group">
+                                <p class="para-v">18<b>%</b></p>
+                                <p class="para-k">
+                                    <i class="xc-icon icon-rmb"></i>
+                                    <span class="label">预期年化收益</span>
+                                </p>
+                                <canvas width="300" height="300" data-percent="0.18"></canvas>
+                            </div>
+
+                            <div id="para">
+                                <div class="para-group">
+                                    <p class="para-v"><em>3</em><span>个月</span></p>
+                                    <p class="para-k">期限</p>
+                                </div>
+                                <div class="para-group">
+                                    <p class="para-v"><em>100</em><span>元</span></p>
+                                    <p class="para-k">起投</p>
+                                </div>
+                                <div class="para-group">
+                                    <p class="para-v"><span>全额担保</span></p>
+                                    <p class="para-k">担保</p>
+                                </div>
+                            </div>
+
+                            <div id="progress">
+                                <p class="rate">75%</p>
+                                <div class="xc-progress-bar clearfix">
+                                    <b class="fr" style="width: 75%;"></b>
+                                </div>
+                                <div class="fl para-group">
+                                    <p class="para-v">18,000,000</p>
+                                    <p class="para-k">项目总额</p>
+                                </div>
+                                <div class="fr para-group">
+                                    <p class="para-v">5,000,000</p>
+                                    <p class="para-k">剩余金额</p>
+                                </div>
+                            </div>
+
+                            <div id="remark">
+                                <span class="label">还款方式 | </span>
+                                <span>一次性还本付息</span>
+                                <a id="protocol" class="fr" href="#">查看协议范本</a>
+                            </div>
+                        </li>
+
+                        <li id="buy_info" class="list-item">
+                            <div class="topbar">
+                                <nav id="nav" class="xc-segmented-control">
+                                    <li class="xc-current"><a href="#section_1">投资保障</a></li>
+                                    <li><a href="#section_2">借款人信息</a></li>
+                                    <li><a href="#section_3">购买列表</a></li>
+                                </nav>
+                            </div>
+
+                            <div id="container" class="xc-segmented-content">
+                                <div class="xc-control-content" id="section_1">
+                                    <p class="xc-icon-label ">
+                                        <i class="xc-icon icon-protect"></i><span class="xc-label">三重保障方式</span>
+                                    </p>
+                                    <section>
+                                        <h3 class="section-title">第一层</h3>
+                                        <p class="section-content">中普的贷款风控审查极为严格，让平台的标的安全更有保障，对每位借款人进行反复校验。让标的更有保障。</p>
+                                    </section>
+                                    <section>
+                                        <h3 class="section-title">第二层</h3>
+                                        <p class="section-content">如果借款用户出现逾期，平台将在第一时间启用风险保障金对理财用户进行先行赔付， 保障每一位理财户的资金安全。</p>
+                                    </section>
+                                    <section>
+                                        <h3 class="section-title">第三层</h3>
+                                        <p class="section-content">如果风险保障金短缺，将采用担保公司赔付机制，拥有雄厚实力的实业担保公司将对我们平台出现的逾期与坏账进行赔付，这是同类P2P公司所没有的赔付环节，真正保障理财人的利益。</p>
+                                    </section>
+                                </div>
+                                <div class="xc-control-content section" id="section_2" style="display: none;">
+                                    <p class="xc-icon-label ">
+                                        <i class="xc-icon icon-person"></i><span class="xc-label">个人基本信息</span>
+                                    </p>
+                                    <table class="person-info">
+                                        <tr>
+                                            <td><span class="key">性别：</span><span class="value">女</span></td>
+                                            <td><span class="key">年龄：</span><span class="value">36岁</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="key">学历：</span><span class="value">大专或本科</span></td>
+                                            <td><span class="key">婚姻状况：</span><span class="value">已婚</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="key">月收入(元)：</span><span class="value">5000</span></td>
+                                            <td><span class="key">邮箱：</span><span class="value">未填写</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="key">所属客服：</span><span class="value">为指定</span></td>
+                                            <td><span class="key">是否购车：</span><span class="value">未填写</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="key">职位：</span><span class="value">个体</span></td>
+                                            <td><span class="key">户籍所在地：</span><span class="value">山东省烟台</span></td>
+                                        </tr>
+                                    </table>
+                                    <section>
+                                        <h3 class="section-title">借款用途</h3>
+                                        <p class="section-content">房屋装修</p>
+                                    </section>
+                                    <section>
+                                        <h3 class="section-title">借款说明</h3>
+                                        <p class="section-content">
+                                            重庆锦通建设（集团）有限公司： 
+                                                      兹由于我司果园港立交收费管理用房项目追赶工期，所需资金匮乏。现特向集团公司申请借款叁拾万圆整，此款定于2013年10月22日还清此款项。  
+                                            特此说明  
+
+                                                                       重庆锦通建设（集团）有限公司一分公司 
+                                              
+                                                                                                                 2013-10-16
+                                        </p>
+                                    </section>
+                                </div>
+                                <div class="xc-control-content section" id="section_3" style="display: none;">
+                                    <table class="report-table">
+                                        <thead>
+                                            <th><span class="section-title">投标人</span></th>
+                                            <th><span class="section-title">投标金额</span></th>
+                                            <th><span class="section-title">投标时间</span></th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>yuanyuan</td>
+                                                <td>￥200,000,00元</td>
+                                                <td>2015.09.09 14:30</td>
+                                            </tr>
+                                            <tr>
+                                                <td>yuanyuan</td>
+                                                <td>￥200,000,00元</td>
+                                                <td>2015.09.09 14:30</td>
+                                            </tr>
+                                            <tr>
+                                                <td>yuanyuan</td>
+                                                <td>￥200,000,00元</td>
+                                                <td>2015.09.09 14:30</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </li>
+                </ul>
+
+
+
+
+		<footer class="xc-bar xc-bar-control">
+			<a id="buy_btn" class="control-btn" href="#">购买</a>
+		</footer>
+
+		<!--<div id="slideForm">
+			<div>
+				<span>剩余可购买金额：</span>
+				<span class="ft-blue">123,123,123</span>
+				<span class="fr ft-red">100元起投</span>
+			</div>
+			<div>
+				<span>预期到期收入金额：</span>
+				<span class="ft-red"><em>￥</em><span id="profile"></span></span>
+			</div>
+			<div class="xc-input-group">
+				<span class="fl ft-b label">输入购买金额：</span>
+				<div class="xc-input-wrap">
+					<input type="number"  id="cost" name="cost" />
+				</div>
+				<div class="xc-bar-control">
+					<a id="buy_confirm" class="control-btn" href="#">确认</a>
+				</div>
+			</div>
+		</div>-->
+
+        <div id="slideForm">
+            <div>
+                <span>您的可用余额：</span>
+                <span class="ft-blue">2.32万元</span>
+            </div>
+            <div>
+                <span>可投资份数：</span>
+                <span class="ft-red"><span id="unit"></span><em>74353份</em></span>
+            </div>
+            <div class="xc-input-group">
+                <span class="fl ft-b label">输入购买份数：</span>
+                <div class="xc-input-wrap input-count">
+                    <span class="fr btn-plus">+</span>
+                    <span class="fl btn-minus">-</span>
+                    <div class="input-wrap">
+                        <input type="number"  id="number" name="number" value=0 />
+                    </div>
+                </div>
+                <div class="xc-bar-control">
+                    <a id="buy_confirm" class="control-btn" href="#">确认</a>
+                </div>
+            </div>
+        </div>
+
+		<div class="xc-mask"></div>
+		<!--<script src="js/jq.mobi.min.js" type="text/javascript" charset="utf-8"></script>-->
+		<script src="js/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>
+<!--		<script src="js/iscroll/iscroll.js" type="text/javascript" charset="utf-8"></script>-->
+		<script type="text/javascript">
+			$(function(){
+				var paraGroup = document.querySelectorAll(".para-group"),
+					$listItem = $('#scroller .list-item'),
+					$topBar = $("#topBar"),
+					$inputCount = $(".input-count"),
+					$number = $("#number");
+				//调用iscroll插件需要的变量
+				var myScroll, pullDownEl, pullDownOffset, pullUpEl, pullUpOffset;
+				var $productInfo = $('#product_info'),
+					$buyInfo = $('#buy_info'),
+					$navLabel = $('.xc-nav-label'),
+					$navTitle = $('.xc-title'),
+					$protocol = $('#protocol'),
+					$navLi = $('#nav li'),
+					$navItem = $('#nav a'),
+					$ctrlContent = $('.xc-control-content'),
+					$buyBtn = $('#buy_btn'),
+					$slideForm = $('#slideForm'),
+					$mask = $('.xc-mask'),
+					$cost = $('#cost'),
+					$profile = $('#profile'),
+					$buyConfirm = $('#buy_confirm');
+
+				init();
+
+				function init(){
+					$listItem.css('minHeight', window.innerHeight - 40);
+					showPies();
+					//initScroll();
+					bind();
+				}
+
+				function bind(){
+					$protocol.bind('touchstart', function(){
+						$protocol.addClass('act');
+					});
+					$protocol.bind('touchend', function(){
+						$protocol.removeClass('act');
+					});
+
+					//选项卡切换
+					$navItem.bind('click', function(e){
+						e.preventDefault();
+						var $this = $(this),
+							id = $this.attr('href').slice(1);
+						$navLi.removeClass('xc-current');
+						$this.parent('li').addClass('xc-current');
+						$ctrlContent.hide();
+						$('#' +id).show();
+					});
+
+					//点击购买按钮弹出输入框
+					$buyBtn.bind('touchend', function(){
+						console.log('buy');
+						$mask.show();
+						$slideForm.slideDown();
+					});
+
+					//点击遮罩层隐藏
+					$mask.bind('touchend', function(){
+						$mask.hide();
+						$slideForm.hide();
+					});
+
+					//输入金额计算收益
+					$cost.bind('keyup', function(){
+						//rate是收益稀释，可以写成公式
+						var rate = 0.1 * 3 / 12;
+						$profile.text(( rate *  $cost.val() ).toFixed(2) );
+					});
+
+					//确认购买
+					$buyConfirm.bind('touchend', function(){
+					    $mask.click();
+					    window.location.href = 'pay.html';
+					    $.ajax({
+					        url: "",
+					        type: 'post',
+					        dataType: 'json',
+					        data: {
+					            //这里的参数根据需要选择传递
+                                sum: $cost.val(),
+                                number: $number.val()
+					        },
+					        success: function(){
+
+					        }
+					    });
+					});
+
+					//增加按钮
+					$inputCount.on('touchend', '.btn-plus', function(){
+					    var $input = $inputCount.find('input[type=number]');
+					    $input.val( parseInt( $input.val() ) + 1 );
+					});
+
+					//减少按钮
+                    $inputCount.on('touchend', '.btn-minus', function(){
+                        var $input = $inputCount.find('input[type=number]');
+                        if( parseInt( $input.val() ) > 0 ){
+                            $input.val( parseInt( $input.val() ) - 1 );
+                        }
+                    });
+				}
+
+				//初始化iScroll插件
+				function initScroll() {
+				    //初始化绑定iScroll控件
+                    document.addEventListener('touchmove', function(e) {
+                        e.preventDefault();
+                    }, false);
+
+					pullDownEl = document.getElementById('pullDown');
+					pullDownOffset = pullDownEl.offsetHeight;
+					pullUpEl = document.getElementById('pullUp');
+					pullUpOffset = pullUpEl.offsetHeight;
+					myScroll = new iScroll('scroller_wrapper', {
+						scrollbarClass: 'myScrollbar',
+						/* 重要样式 */
+						useTransition: false,
+						/* 此属性不知用意，本人从true改为false */
+						topOffset: pullDownOffset,
+						onRefresh: function() {
+							if (pullDownEl.className.match('loading')) {
+								pullDownEl.className = '';
+								pullDownEl.querySelector('.pullDownLabel').innerHTML = '查看产品详情';
+							} else if (pullUpEl.className.match('loading')) {
+								pullUpEl.className = '';
+								pullUpEl.querySelector('.pullUpLabel').innerHTML = '查看购买详情';
+							}
+						},
+						onScrollMove: function() {
+							if (this.y > 5 && !pullDownEl.className.match('flip')) {
+								pullDownEl.className = 'flip';
+								pullDownEl.querySelector('.pullDownLabel').innerHTML = '松手开始加载...';
+								this.minScrollY = 0;
+							} else if (this.y < 5 && pullDownEl.className.match('flip')) {
+								pullDownEl.className = '';
+								pullDownEl.querySelector('.pullDownLabel').innerHTML = '查看产品详情';
+								this.minScrollY = -pullDownOffset;
+							} else if (this.y < (this.maxScrollY - 5) && !pullUpEl.className.match('flip')) {
+								pullUpEl.className = 'flip';
+								pullUpEl.querySelector('.pullUpLabel').innerHTML = '松手开始加载...';
+								this.maxScrollY = this.maxScrollY;
+							} else if (this.y > (this.maxScrollY + 5) && pullUpEl.className.match('flip')) {
+								pullUpEl.className = '';
+								pullUpEl.querySelector('.pullUpLabel').innerHTML = '查看购买详情';
+								this.maxScrollY = pullUpOffset;
+							}
+						},
+						onScrollEnd: function() {
+							if (pullDownEl.className.match('flip')) {
+								pullDownEl.className = 'loading';
+								pullDownEl.querySelector('.pullDownLabel').innerHTML = '加载中...';
+								pullDownAction(); // Execute custom function (ajax call?)
+							} else if (pullUpEl.className.match('flip')) {
+								pullUpEl.className = 'loading';
+								pullUpEl.querySelector('.pullUpLabel').innerHTML = '加载中...';
+								pullUpAction(); // Execute custom function (ajax call?)
+							}
+						}
+					});
+					setTimeout(function() {
+						document.getElementById('scroller_wrapper').style.left = '0';
+					}, 800);
+				}
+
+				/**
+				 * 下拉刷新 （自定义实现此方法）
+				 * myScroll.refresh();		// 数据加载完成后，调用界面更新方法
+				 */
+				function pullDownAction() {
+					setTimeout(function() { // <-- Simulate network congestion, remove setTimeout from production!
+						/*这里是刷新代码*/
+						console.log('pull down');
+						$buyInfo.addClass('hide');
+						$productInfo.removeClass('hide');
+						$navLabel.show();
+						$navTitle.hide();
+//						$topBar.removeClass('bg-black');
+						myScroll.refresh(); //数据加载完成后，调用界面更新方法   Remember to refresh when contents are loaded (ie: on ajax completion)
+					}, 1000); // <-- Simulate network congestion, remove setTimeout from production!
+				}
+
+				/**
+				 * 滚动翻页 （自定义实现此方法）
+				 * myScroll.refresh();		// 数据加载完成后，调用界面更新方法
+				 */
+				function pullUpAction() {
+					setTimeout(function() { // <-- Simulate network congestion, remove setTimeout from production!
+						/*这里是加载更多代码*/
+						console.log('pull up');
+						$productInfo.addClass('hide');
+						$buyInfo.removeClass('hide');
+						$navLabel.hide();
+						$navTitle.show();
+//						$topBar.addClass('bg-black');
+						myScroll.refresh(); // 数据加载完成后，调用界面更新方法 Remember to refresh when contents are loaded (ie: on ajax completion)
+						myScroll.scrollTo(0, 0, 200);
+					}, 1000); // <-- Simulate network congestion, remove setTimeout from production!
+				}
+
+				//页面加载完成后跑一遍这个函数，根据canvas上的data-percent为每个canvas刷环状图
+				function showPies(){
+					var cvs, ctx, r, percent, imageData;
+
+					[].forEach.call(paraGroup, function(o, i, arr){
+						//console.log(o, i);
+						cvs = o.querySelector("canvas");
+
+						if (cvs){
+							ctx = cvs.getContext('2d');
+							r = cvs.width / 2;
+							percent = cvs.dataset.percent;
+							endAngle = ( -1 - 2 * percent ) * Math.PI;
+
+							ctx.beginPath();
+							ctx.arc(r, r, r - 16, -Math.PI, Math.PI, false);
+							ctx.lineWidth = 6.0;
+							ctx.strokeStyle = "#fff";
+							ctx.stroke();
+
+							ctx.beginPath();
+							ctx.arc(r, r, r - 16, -Math.PI, endAngle, true);
+							ctx.lineWidth = 6.0;
+							ctx.strokeStyle = "#c1e472";
+							ctx.stroke();
+
+							ctx.beginPath();
+							ctx.arc(r, r, r - 16, -Math.PI, Math.PI, false);
+							ctx.lineWidth = 14.0;
+							ctx.strokeStyle = "rgba(255,255,255,0.2)";
+							ctx.stroke();
+						}
+					});
+				}
+
+			});
+		</script>
+	</body>
+</html>

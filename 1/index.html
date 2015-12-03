@@ -1,373 +1,412 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title>中普投资</title>
-		<link rel="stylesheet" type="text/css" href="css/init-mobi.css"/>
-		<link rel="stylesheet" type="text/css" href="css/resources.css"/>
-		<style>
-			.xc-bar-nav{ background-color: #2a323f;}
-			.xc-bar-nav .xc-title{color: #fff;}
-			.xc-container{padding-bottom: 40px;}
-			.xc-table-view-cell{padding: 0; border-top: solid 2px #8fc21f; border-bottom: solid 10px #f5f5f5;}
-			.xc-bar-tab{border-top: solid 1px #8fc21f; background-color: #fff;}
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title>中普理财</title>
+        <link rel="stylesheet" type="text/css" href="css/init-mobi.css"/>
+        <link rel="stylesheet" type="text/css" href="css/resources.css"/>
+        <style>
+            body{height: auto;}
 
-			/* nav */
-			.topbar{/*top: 40px; */height: auto; padding: 10px; background-color: #f5f5f5;}
-			#nav{display: table; width: 100%; border: solid 2px #8fc21f; border-radius: 3px;}
-			#nav li{display:table-cell;}
-			#nav li a{display: block; height: 2em; line-height: 2em; text-align:center; color: #8fc21f; overflow:hidden;}
-			#nav li a:hover{text-decoration: none; color:#dedede;}
-			#nav li.xc-current a{background:#8fc21f; color:#fff;}
+            /*导航*/
+            .xc-bar-nav{}
+            .xc-bar-nav .xc-title{font-size: 1.2em; top: 0; height: 44px; line-height: 44px; color: #fff;}
 
-			/* container */
-			#container{margin-bottom: 40px;}
-			.section{margin-bottom: -45px; padding: 50px 0 0;}
-			.section-bar-nav{margin-top: 5px; height: 30px; padding: 0 10px;}
-			.section-title{}
-			.section-more{margin-top: 8px; width: 21px; height: 5px;}
-			.xc-table-view-cell a{display: block; padding: 10px;}
-			.xc-table-view-cell a:active{background-color: #f5f5f5;}
+            .xc-pull-left{font-size: 1.2em; margin-left: 10px;}
+            .xc-pull-left .xc-icon{display: inline-block; width: 1.2em; height: 1.2em;}
+            .xc-pull-left .xc-nav-label{color: #fff;}
+            .xc-container{ /*padding-top: 44px; padding-bottom: 44px;*/ overflow: hidden;}
+            .xc-bar-control{margin-top: 1em; padding: 5px 10px; border-top: solid 1px #e7e7e7; background-color: #fff;}
 
-			.pro-title{}
-			.pro-title h3{display: inline-block;}
-			.rcmd{font-size: 0.8em; padding: 0 0.2em; background-color: #f64a4a; color: #fff;}
-			.para{overflow: hidden;}
-			.para-group{padding: 1em;}
-			.para-group:first-child{padding-left: 0; width: 40%;}
-			.para-group:last-child{position: relative; width: 5em; height: 5em; text-align: center;}
-			.para-group canvas{width: 100%; height: 100%; position: absolute; left: 0; top: 0;}
-			.para-group.circle{}
-			.para-v{font-size: 1.2em;}
-			.para-k{font-size: 0.8em; color: #a7a7a7;}
+            /* container */
+            #container{margin-bottom: 40px;}
+            .section-bar-nav{margin-top: 5px; padding: 8px 10px; border-bottom: solid 2px #8fc21f; overflow: hidden; position: relative;}
+            .icon-recommend{display: block; width: 2.5em; height: 3.2857em; position: absolute;}
+            .section-title{}
+            .section-bar-nav.recommend .section-title{font-size: 1.2em; color: #fff; padding-left: 2.8em;}
+            .section-more{margin-top: 6px; width: 21px; height: 5px;}
+            .statement{text-align: center; color: #fff; padding-bottom: 1em;}
+            .statement .xc-icon{width: 1em; height: 1em; }
+            .xc-table-view-cell a{display: block; padding: 10px;}
+            .xc-table-view-cell a:active{background-color: #f5f5f5;}
 
-			/*bottom-tab*/
-			.xc-bar-tab{bottom: -0.5em;}
-			.xc-tab-item{position: relative; top: -0.2em; -webkit-transform: scale(0.8); transform: scale(0.8);}
-			.xc-tab-item .xc-icon{width: 2em; height: 2em;}
-		</style>
-	</head>
+            .pro-title{}
+            .pro-title h3{display: inline-block;}
+            .rcmd{font-size: 0.8em; padding: 0 0.2em; background-color: #f64a4a; color: #fff;}
+            .para{overflow: hidden;}
+            .para-group{padding: 1em;}
+            .para-group:first-child{padding-left: 0; width: 40%;}
+            .para-group:last-child{text-align: right;}
+            .para-group:last-child .para-v{margin-left: 5px;}
+            .para-group:last-child progress{width: 7em;}
+            .para-group.circle{}
+            .para-v{font-size: 1.2em;}
+            .para-k{font-size: 0.8em; color: #a7a7a7;}
+            .para-group:last-child {position: relative; width: 5em; height: 5em; text-align: center;}
+            .para-group canvas {width: 100%; height: 100%; position: absolute; left: 0; top: 0;}
 
-	<body>
+            /* container */
+            #yield{margin: 0 auto 1em; padding: 0; width: 12em; height: 12em; position: relative; color: #fff; z-index: 9;}
+            #yield  canvas{width: 100%; height: 100%; position: absolute; left: 0; top: 0; z-index: -1;}
+            #yield .para-v{font-size: 3em; padding: 1.2em 1em 0; text-align: center; color: #ea544a;}
+            #yield .para-v b{font-size: 0.5em;}
+            #yield .para-k{font-size: 0.8em; padding: 0 2em;  text-align: center; color: #ffa087;}
+            #yield .para-k .xc-icon{width: 1em; height: 1em; display: inline-block; vertical-align: middle;}
+            #yield .para-k .label{vertical-align: middle}
 
-		<!--<header class="xc-bar xc-bar-nav">
-			<h1 class="xc-title">中普投资</h1>
-		</header>-->
+            #para{display: table; width: 100%;}
+            #para .para-group{display: table-cell; width: 33.33%; text-align: center;}
+            #para .para-v span, .para-k{font-size: 0.8em;}
+            #para .para-k{color: #8fc21f;}
 
-		<div class="xc-container">
-			<div class="xc-bar topbar">
-				<nav id="nav" class="xc-segmented-control">
-					<li class="xc-current"><a class="xc-control-item" href="#section_1">推荐理财</a></li>
-					<li><a href="#section_2">散标理财</a></li>
-					<li><a href="#section_3">理财计划</a></li>
-				</nav>
-			</div>
+            /*#progress{margin:  0 10px; padding: 1em 0; border-bottom: solid 1px #e7e7e7; overflow: hidden;}
+            #progress .rate{text-align: right;}
+            #progress .xc-progress-bar{margin: 10px 0; height: 8px; border-radius: 5px; background-color: #0097c9;}
+            #progress .xc-progress-bar b{background-color: #ddd;}
+            #progress .para-k{color: #929292;}*/
 
-			<div id="container" class="xc-segmented-content">
-				<div class="xc-control-content section" id="section_1">
-					<div class="section-bar-nav">
-						<h2 class="fl section-title">推荐理财</h2>
-						<a class="fr xc-icon icon-more section-more"></a>
-					</div>
-					<ul class="xc-table-view pro-list">
-						<li class="xc-table-view-cell">
-							<a class="pro-item" href="info.html">
-								<div class="pro-title">
-									<h3>车抵押项目</h3>
-									<em class="rcmd">推介</em>
-								</div>
-								<div class="para">
-									<div class="fl para-group">
-										<p class="para-v">18.8%</p>
-										<p class="para-k">预期年化收益</p>
-									</div>
-									<div class="fl para-group">
-										<p class="para-v">365天</p>
-										<p class="para-k">期限</p>
-									</div>
-									<div class="fr para-group">
-										<p class="para-v">96%</p>
-										<p class="para-k">进度</p>
-										<canvas width="100" height="100" data-percent = "0.96"></canvas>
-									</div>
-								</div>
-							</a>
-						</li>
-						<li class="xc-table-view-cell">
-							<a class="pro-item" href="#">
-								<div class="pro-title">
-									<h3>车抵押项目</h3>
-									<em class="rcmd">推介</em>
-								</div>
-								<div class="para">
-									<div class="fl para-group">
-										<p class="para-v">18.8%</p>
-										<p class="para-k">预期年化收益</p>
-									</div>
-									<div class="fl para-group">
-										<p class="para-v">365天</p>
-										<p class="para-k">期限</p>
-									</div>
-									<div class="fr para-group">
-										<p class="para-v">92%</p>
-										<p class="para-k">进度</p>
-										<canvas width="100" height="100" data-percent = "0.92"></canvas>
-									</div>
-								</div>
-							</a>
-						</li>
-						<li class="xc-table-view-cell">
-							<a class="pro-item" href="#">
-								<div class="pro-title">
-									<h3>车抵押项目</h3>
-									<em class="rcmd">推介</em>
-								</div>
-								<div class="para">
-									<div class="fl para-group">
-										<p class="para-v">18.8%</p>
-										<p class="para-k">预期年化收益</p>
-									</div>
-									<div class="fl para-group">
-										<p class="para-v">365天</p>
-										<p class="para-k">期限</p>
-									</div>
-									<div class="fr para-group">
-										<p class="para-v">86%</p>
-										<p class="para-k">进度</p>
-										<canvas width="100" height="100" data-percent = "0.86"></canvas>
-									</div>
-								</div>
-							</a>
-						</li>
-					</ul>
-				</div>
-				<div class="xc-control-content section" id="section_2">
-					<div class="section-bar-nav">
-						<h2 class="fl section-title">散标投资</h2>
-						<a class="fr xc-icon icon-more section-more"></a>
-					</div>
-					<ul class="xc-table-view pro-list">
-						<li class="xc-table-view-cell">
-							<a class="pro-item" href="#">
-								<div class="pro-title">
-									<h3>车抵押项目</h3>
-									<em class="rcmd">推介</em>
-								</div>
-								<div class="para">
-									<div class="fl para-group">
-										<p class="para-v">18.8%</p>
-										<p class="para-k">预期年化收益</p>
-									</div>
-									<div class="fl para-group">
-										<p class="para-v">365天</p>
-										<p class="para-k">期限</p>
-									</div>
-									<div class="fr para-group">
-										<p class="para-v">96%</p>
-										<p class="para-k">进度</p>
-										<canvas width="100" height="100" data-percent = "0.96"></canvas>
-									</div>
-								</div>
-							</a>
-						</li>
-						<li class="xc-table-view-cell">
-							<a class="pro-item" href="#">
-								<div class="pro-title">
-									<h3>车抵押项目</h3>
-									<em class="rcmd">推介</em>
-								</div>
-								<div class="para">
-									<div class="fl para-group">
-										<p class="para-v">18.8%</p>
-										<p class="para-k">预期年化收益</p>
-									</div>
-									<div class="fl para-group">
-										<p class="para-v">365天</p>
-										<p class="para-k">期限</p>
-									</div>
-									<div class="fr para-group">
-										<p class="para-v">92%</p>
-										<p class="para-k">进度</p>
-										<canvas width="100" height="100" data-percent = "0.92"></canvas>
-									</div>
-								</div>
-							</a>
-						</li>
-						<li class="xc-table-view-cell">
-							<a class="pro-item" href="#">
-								<div class="pro-title">
-									<h3>车抵押项目</h3>
-									<em class="rcmd">推介</em>
-								</div>
-								<div class="para">
-									<div class="fl para-group">
-										<p class="para-v">18.8%</p>
-										<p class="para-k">预期年化收益</p>
-									</div>
-									<div class="fl para-group">
-										<p class="para-v">365天</p>
-										<p class="para-k">期限</p>
-									</div>
-									<div class="fr para-group">
-										<p class="para-v">86%</p>
-										<p class="para-k">进度</p>
-										<canvas width="100" height="100" data-percent = "0.86"></canvas>
-									</div>
-								</div>
-							</a>
-						</li>
-					</ul>
-				</div>
-				<div class="xc-control-content section" id="section_3">
-				<div class="section-bar-nav">
-						<h2 class="fl section-title">理财计划</h2>
-						<a class="fr xc-icon icon-more section-more"></a>
-					</div>
-					<ul class="xc-table-view pro-list">
-						<li class="xc-table-view-cell">
-							<a class="pro-item" href="#">
-								<div class="pro-title">
-									<h3>车抵押项目</h3>
-									<em class="rcmd">推介</em>
-								</div>
-								<div class="para">
-									<div class="fl para-group">
-										<p class="para-v">18.8%</p>
-										<p class="para-k">预期年化收益</p>
-									</div>
-									<div class="fl para-group">
-										<p class="para-v">365天</p>
-										<p class="para-k">期限</p>
-									</div>
-									<div class="fr para-group">
-										<p class="para-v">96%</p>
-										<p class="para-k">进度</p>
-										<canvas width="100" height="100" data-percent = "0.96"></canvas>
-									</div>
-								</div>
-							</a>
-						</li>
-						<li class="xc-table-view-cell">
-							<a class="pro-item" href="#">
-								<div class="pro-title">
-									<h3>车抵押项目</h3>
-									<em class="rcmd">推介</em>
-								</div>
-								<div class="para">
-									<div class="fl para-group">
-										<p class="para-v">18.8%</p>
-										<p class="para-k">预期年化收益</p>
-									</div>
-									<div class="fl para-group">
-										<p class="para-v">365天</p>
-										<p class="para-k">期限</p>
-									</div>
-									<div class="fr para-group">
-										<p class="para-v">9%</p>
-										<p class="para-k">进度</p>
-										<canvas width="100" height="100" data-percent = "0.92"></canvas>
-									</div>
-								</div>
-							</a>
-						</li>
-						<li class="xc-table-view-cell">
-							<a class="pro-item" href="#">
-								<div class="pro-title">
-									<h3>车抵押项目</h3>
-									<em class="rcmd">推介</em>
-								</div>
-								<div class="para">
-									<div class="fl para-group">
-										<p class="para-v">18.8%</p>
-										<p class="para-k">预期年化收益</p>
-									</div>
-									<div class="fl para-group">
-										<p class="para-v">365天</p>
-										<p class="para-k">期限</p>
-									</div>
-									<div class="fr para-group">
-										<p class="para-v">86%</p>
-										<p class="para-k">进度</p>
-										<canvas width="100" height="100" data-percent = "0.86"></canvas>
-									</div>
-								</div>
-							</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
+            /* 底部控制栏 */
+            .control-btn{display: block; height: 32px; line-height: 32px; text-align: center; color: #fff; background-color: #F64A4A;}
+            .control-btn:link{color: #fff;}
+            .control-btn:visited{color: #fff;}
+            .control-btn:active{background-color: #d63A3A;}
 
-		<nav class="xc-bar xc-bar-tab">
-			<a class="xc-tab-item" href="#">
-				<i class="xc-icon icon-coin on"></i>
-				<span class="xc-tab-label">理财</span>
-			</a>
-			<a class="xc-tab-item" href="#">
-				<i class="xc-icon icon-purse"></i>
-				<span class="xc-tab-label">钱包</span>
-			</a>
-			<a class="xc-tab-item" href="#">
-				<i class="xc-icon icon-setting"></i>
-				<span class="xc-tab-label">设置</span>
-			</a>
-		</nav>
-		<script src="js/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/jquery.scrollTo.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/jq.nav.min.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript">
-			$(function(){
-				//带环状百分比的参数组
-				var paraGroup = document.querySelectorAll(".para-group");
-				init();
+            .list-item{overflow: hidden; padding-bottom: 40px;}
+            #product_info{padding-top: 40px; background:-webkit-linear-gradient(top, #0b85d0,  #0b85d0  32%, #fff 60%); background-repeat:no-repeat;}
 
-				function init(){
-					bind();
-					showPies();
+            .xc-container{padding-bottom: 44px;}
+            .xc-table-view-cell{padding: 0; border-bottom: solid 10px #f5f5f5;}
+            .xc-bar-tab{border-top: solid 1px #8fc21f; background-color: #fff;}
 
-					$('#nav').onePageNav({
-						currentClass: 'xc-current',
-						filter: ':not(.external)',
-						scrollThreshold: 0.25
-					});
-				}
+            /* nav */
+            #topBar{padding: 8px 20px; height: auto; background-color: #f5f5f5; overflow: hidden;}
+            #nav{display: table; width: 100%; border: solid 2px #8fc21f; border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; overflow: hidden;}
+            #nav li{display:table-cell;}
+            #nav li a{display: block; height: 2em; line-height: 2em; text-align:center; color:#8fc21f; overflow:hidden;}
+            #nav li a:hover{text-decoration: none; color:#fff;}
+            #nav li.xc-current a{background:#8fc21f; color: #fff;}
 
-				function bind(){
+            #section_1{padding-top: 44px; background: -webkit-linear-gradient(top, #ff4f4f, #ff6b49 50%, #ff8244 100%);}
+            #section_1 .section-bar-nav{height: 3em; border: none; background: none; overflow: visible;}
 
-				}
+            /*bottom-tab*/
+            .xc-bar-tab{bottom: -0.5em;}
+            .xc-tab-item{position: relative; top: -0.2em; -webkit-transform: scale(0.8); transform: scale(0.8);}
+            .xc-tab-item .xc-icon{width: 2em; height: 2em;}
+        </style>
+    </head>
 
-				//页面加载完成后跑一遍这个函数，根据canvas上的data-percent为每个canvas刷环状图
-				function showPies(){
-					var cvs, ctx, r, percent;
+    <body>
+            <header id="topBar" class="xc-bar xc-bar-nav topbar">
+                <nav id="nav" class="xc-segmented-control">
+                    <li class="xc-current"><a href="#section_1">随心保</a></li>
+                    <li><a href="#section_2">散标投资</a></li>
+                    <li><a href="#section_3">理财计划</a></li>
+                </nav>
+            </header>
+<!--
+                <ul id="listView" class="list-view">
+                        <li id="product_info" class="list-item">
 
-					[].forEach.call(paraGroup, function(o, i, arr){
-						//console.log(o, i);
-						cvs = o.querySelector("canvas");
+                        </li>
+                </ul>-->
 
-						if (cvs){
-							ctx = cvs.getContext('2d');
-							r = cvs.width / 2;
-							percent = cvs.dataset.percent;
-							endAngle = Math.PI * (  2 * percent - 0.5 );
+            <div id="container">
+                <div class="xc-control-content section" id="section_1">
+                    <div class="section-bar-nav recommend">
+                        <i class="xc-icon icon-recommend"></i>
+                        <h2 class="fl section-title">随心宝 可随时支取</h2>
+                        <a class="fr xc-icon icon-more section-more"></a>
+                    </div>
+                    <div id="yield" class="para-group">
+                        <p class="para-v">18<b>%</b></p>
+                        <p class="para-k">
+                            <span class="label">预期年化收益</span>
+                        </p>
+                        <canvas width="300" height="300" data-percent="1"></canvas>
+                    </div>
+                    <p class="xc-icon-label statement"><i class="xc-icon icon-safe"></i><span class="xc-label">本产品由泰祥担保公司全额本息担保</span></p>
+                </div>
 
-							ctx.beginPath();
-							ctx.arc(r, r, r - 2, -Math.PI*0.5, Math.PI*1.5, false);
-							ctx.lineWidth = 2.0;
-							ctx.strokeStyle = "#d8d8d8";
-							ctx.stroke();
+                <div class="xc-control-content section" id="section_2">
+                    <div class="section-bar-nav">
+                        <h2 class="fl section-title">散标投资</h2>
+                        <a class="fr xc-icon icon-more section-more"></a>
+                    </div>
+                    <ul class="xc-table-view pro-list">
+                        <li class="xc-table-view-cell">
+                            <a class="pro-item" href="info.html">
+                                <div class="pro-title">
+                                    <h3>车抵押项目</h3>
+                                    <em class="rcmd">推介</em>
+                                </div>
+                                <div class="para">
+                                    <div class="fl para-group">
+                                        <p class="para-v">18.8%</p>
+                                        <p class="para-k">预期年化收益</p>
+                                    </div>
+                                    <div class="fl para-group">
+                                        <p class="para-v">365天</p>
+                                        <p class="para-k">期限</p>
+                                    </div>
+                                    <div class="fr para-group">
+                                        <p class="para-v">96%</p>
+                                        <p class="para-k">进度</p>
+                                        <canvas width="100" height="100" data-percent = "0.96"></canvas>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="xc-table-view-cell">
+                            <a class="pro-item" href="info.html">
+                                <div class="pro-title">
+                                    <h3>车抵押项目</h3>
+                                    <em class="rcmd">推介</em>
+                                </div>
+                                <div class="para">
+                                    <div class="fl para-group">
+                                        <p class="para-v">18.8%</p>
+                                        <p class="para-k">预期年化收益</p>
+                                    </div>
+                                    <div class="fl para-group">
+                                        <p class="para-v">365天</p>
+                                        <p class="para-k">期限</p>
+                                    </div>
+                                    <div class="fr para-group">
+                                        <p class="para-v">92%</p>
+                                        <p class="para-k">进度</p>
+                                        <canvas width="100" height="100" data-percent = "0.92"></canvas>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="xc-table-view-cell">
+                            <a class="pro-item" href="info.html">
+                                <div class="pro-title">
+                                    <h3>车抵押项目</h3>
+                                    <em class="rcmd">推介</em>
+                                </div>
+                                <div class="para">
+                                    <div class="fl para-group">
+                                        <p class="para-v">18.8%</p>
+                                        <p class="para-k">预期年化收益</p>
+                                    </div>
+                                    <div class="fl para-group">
+                                        <p class="para-v">365天</p>
+                                        <p class="para-k">期限</p>
+                                    </div>
+                                    <div class="fr para-group">
+                                        <p class="para-v">86%</p>
+                                        <p class="para-k">进度</p>
+                                        <canvas width="100" height="100" data-percent = "0.86"></canvas>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
 
-							ctx.beginPath();
-							ctx.arc(r, r, r - 2, -Math.PI*0.5, endAngle, false);
-							ctx.lineWidth = 2.0;
-							ctx.strokeStyle = "#ff1e00";
-							ctx.stroke();
-						}
-					});
-				}
+                <div class="xc-control-content section" id="section_3">
+                <div class="section-bar-nav">
+                        <h2 class="fl section-title">理财计划</h2>
+                        <a class="fr xc-icon icon-more section-more"></a>
+                    </div>
+                    <ul class="xc-table-view pro-list">
+                        <li class="xc-table-view-cell">
+                            <a class="pro-item" href="info.html">
+                                <div class="pro-title">
+                                    <h3>车抵押项目</h3>
+                                    <em class="rcmd">推介</em>
+                                </div>
+                                <div class="para">
+                                    <div class="fl para-group">
+                                        <p class="para-v">18.8%</p>
+                                        <p class="para-k">预期年化收益</p>
+                                    </div>
+                                    <div class="fl para-group">
+                                        <p class="para-v">365天</p>
+                                        <p class="para-k">期限</p>
+                                    </div>
+                                    <div class="fr para-group">
+                                        <p class="para-v">96%</p>
+                                        <p class="para-k">进度</p>
+                                        <canvas width="100" height="100" data-percent = "0.96"></canvas>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="xc-table-view-cell">
+                            <a class="pro-item" href="info.html">
+                                <div class="pro-title">
+                                    <h3>车抵押项目</h3>
+                                    <em class="rcmd">推介</em>
+                                </div>
+                                <div class="para">
+                                    <div class="fl para-group">
+                                        <p class="para-v">18.8%</p>
+                                        <p class="para-k">预期年化收益</p>
+                                    </div>
+                                    <div class="fl para-group">
+                                        <p class="para-v">365天</p>
+                                        <p class="para-k">期限</p>
+                                    </div>
+                                    <div class="fr para-group">
+                                        <p class="para-v">9%</p>
+                                        <p class="para-k">进度</p>
+                                        <canvas width="100" height="100" data-percent = "0.09"></canvas>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="xc-table-view-cell">
+                            <a class="pro-item" href="info.html">
+                                <div class="pro-title">
+                                    <h3>车抵押项目</h3>
+                                    <em class="rcmd">推介</em>
+                                </div>
+                                <div class="para">
+                                    <div class="fl para-group">
+                                        <p class="para-v">18.8%</p>
+                                        <p class="para-k">预期年化收益</p>
+                                    </div>
+                                    <div class="fl para-group">
+                                        <p class="para-v">365天</p>
+                                        <p class="para-k">期限</p>
+                                    </div>
+                                    <div class="fr para-group">
+                                        <p class="para-v">96%</p>
+                                        <p class="para-k">进度</p>
+                                        <canvas width="100" height="100" data-percent = "0.96"></canvas>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
 
-			});
-		</script>
-	</body>
+            </div>
+        <nav class="xc-bar xc-bar-tab">
+            <a class="xc-tab-item" href="#">
+                <i class="xc-icon icon-coin on"></i>
+                <span class="xc-tab-label">理财</span>
+            </a>
+            <a class="xc-tab-item" href="#">
+                <i class="xc-icon icon-purse"></i>
+                <span class="xc-tab-label">钱包</span>
+            </a>
+            <a class="xc-tab-item" href="#">
+                <i class="xc-icon icon-setting"></i>
+                <span class="xc-tab-label">设置</span>
+            </a>
+        </nav>
+
+
+        <div class="xc-mask"></div>
+        <script src="js/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript">
+            $(function(){
+                var paraGroup = document.querySelectorAll(".para-group"),
+                    $topBar = $("#topBar");
+                var $productInfo = $('#product_info'),
+                    $navLabel = $('.xc-nav-label'),
+                    $navTitle = $('.xc-title'),
+                    $navLi = $('#nav li'),
+                    $navItem = $('#nav a'),
+                    $ctrlContent = $('.xc-control-content'),
+                    $mask = $('.xc-mask');
+
+                init();
+
+                function init(){
+                    showPies();
+                    bind();
+                }
+
+                function bind(){
+                    //选项卡切换
+                    $navItem.bind('click', function(e){
+                        e.preventDefault();
+                        var $this = $(this),
+                            id = $this.attr('href').slice(1);
+                        $navLi.removeClass('xc-current');
+                        $this.parent('li').addClass('xc-current');
+                        //console.log($('#' +id)[0].offsetTop);
+                        //window.scrollTo(0, $('#' +id)[0].offsetTop - 44);
+                        $("body").animate({ scrollTop: $('#' +id)[0].offsetTop - 44 }, 1000);
+                    });
+
+                    //点击遮罩层隐藏
+                    $mask.bind('touchend', function(){
+                        $mask.hide();
+                        $slideForm.hide();
+                    });
+                }
+
+                //页面加载完成后跑一遍这个函数，根据canvas上的data-percent为每个canvas刷环状图
+                //目前需求这个页面就一个环形图
+                function showPies(){
+                    var cvs, ctx, r, percent, imageData, _count = 0;
+
+                    [].forEach.call(paraGroup, function(o, i, arr){
+                        //console.log(o, i);
+                        cvs = o.querySelector("canvas");
+
+                        if (cvs){
+                            ctx = cvs.getContext('2d');
+                            r = cvs.width / 2;
+                            percent = cvs.dataset.percent;
+                            endAngle = ( -1 - 2 * percent ) * Math.PI;
+
+                            if(_count){
+                                ctx = cvs.getContext('2d');
+                                r = cvs.width / 2;
+                                percent = cvs.dataset.percent;
+                                endAngle = Math.PI * (  2 * percent - 0.5 );
+
+                                ctx.beginPath();
+                                ctx.arc(r, r, r - 8, -Math.PI*0.5, Math.PI*1.5, false);
+                                ctx.lineWidth = 4.0;
+                                ctx.strokeStyle = "#d8d8d8";
+                                ctx.stroke();
+
+                                ctx.beginPath();
+                                ctx.arc(r, r, r - 8, -Math.PI*0.5, endAngle, false);
+                                ctx.lineWidth = 4.0;
+                                ctx.strokeStyle = "#ff1e00";
+                                ctx.stroke();
+                            }else{
+                                //渐变内圆
+                                ctx.beginPath();
+                                ctx.arc(r, r, r-10, 0, Math.PI*2, true);
+                                ctx.fillStyle = "#ffffff";
+                                ctx.fill();
+
+                                ctx.beginPath();
+                                ctx.arc(r, r, r - 16, -Math.PI, Math.PI, false);
+                                ctx.lineWidth = 10.0;
+                                ctx.strokeStyle = "#fff";
+                                ctx.stroke();
+
+                                ctx.beginPath();
+                                ctx.arc(r, r, r - 16, -Math.PI, endAngle, true);
+                                ctx.lineWidth = 10.0;
+                                ctx.strokeStyle = "#ffc3b6";
+                                ctx.stroke();
+
+                                ctx.beginPath();
+                                ctx.arc(r, r, r - 16, -Math.PI, Math.PI, false);
+                                ctx.lineWidth = 14.0;
+                                ctx.strokeStyle = "rgba(255,255,255,0.2)";
+                                ctx.stroke();
+                            }
+                            _count++;
+                        }
+                    });
+                }
+
+            });
+        </script>
+    </body>
 </html>

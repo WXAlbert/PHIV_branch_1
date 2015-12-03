@@ -74,5 +74,5 @@ h2.xc-title{font-size: 1em;}
 /*************************************************************/
 
 /************************ page common *************************/
-.section-title{font-size: 1em;}
+.section-title{font-size: 1em; padding-left: 8px; border-left: solid 2px #8fc21f;}
 
