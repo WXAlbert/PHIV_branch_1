@@ -90,11 +90,6 @@
 			/*购买页弹出层*/
 			#slideForm{display: none; padding: 10px; border-top: solid 2px #8FC21F; position: fixed; left: 0; right: 0; bottom: 0; z-index: 11; background-color: #fff;}
 			.xc-input-wrap{margin-left: 8em;}
-
-            .input-count{}
-			.btn-plus, .btn-minus{font-size: 1.5em; margin: 0 5px; width: 1em; height: 1em; line-height: 0.8em; text-align: center; background-color: #C9C9C9; color: #fff;}
-			.input-wrap{margin: 0 calc(1.6em + 10px);}
-			#number{text-align: center;}
 		</style>
 	</head>
 
@@ -264,7 +259,7 @@
 			<a id="buy_btn" class="control-btn" href="#">购买</a>
 		</footer>
 
-		<!--<div id="slideForm">
+		<div id="slideForm">
 			<div>
 				<span>剩余可购买金额：</span>
 				<span class="ft-blue">123,123,123</span>
@@ -283,32 +278,7 @@
 					<a id="buy_confirm" class="control-btn" href="#">确认</a>
 				</div>
 			</div>
-		</div>-->
-
-        <div id="slideForm">
-            <div>
-                <span>您的可用余额：</span>
-                <span class="ft-blue">2.32万元</span>
-            </div>
-            <div>
-                <span>可投资份数：</span>
-                <span class="ft-red"><span id="unit"></span><em>74353份</em></span>
-            </div>
-            <div class="xc-input-group">
-                <span class="fl ft-b label">输入购买份数：</span>
-                <div class="xc-input-wrap input-count">
-                    <span class="fr btn-plus">+</span>
-                    <span class="fl btn-minus">-</span>
-                    <div class="input-wrap">
-                        <input type="number"  id="number" name="number" value=0 />
-                    </div>
-                </div>
-                <div class="xc-bar-control">
-                    <a id="buy_confirm" class="control-btn" href="#">确认</a>
-                </div>
-            </div>
-        </div>
-
+		</div>
 		<div class="xc-mask"></div>
 		<!--<script src="js/jq.mobi.min.js" type="text/javascript" charset="utf-8"></script>-->
 		<script src="js/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>
@@ -317,9 +287,7 @@
 			$(function(){
 				var paraGroup = document.querySelectorAll(".para-group"),
 					$listItem = $('#scroller .list-item'),
-					$topBar = $("#topBar"),
-					$inputCount = $(".input-count"),
-					$number = $("#number");
+					$topBar = $("#topBar");
 				//调用iscroll插件需要的变量
 				var myScroll, pullDownEl, pullDownOffset, pullUpEl, pullUpOffset;
 				var $productInfo = $('#product_info'),
@@ -366,14 +334,14 @@
 					});
 
 					//点击购买按钮弹出输入框
-					$buyBtn.bind('touchend', function(){
+					$buyBtn.bind('click', function(){
 						console.log('buy');
 						$mask.show();
 						$slideForm.slideDown();
 					});
 
 					//点击遮罩层隐藏
-					$mask.bind('touchend', function(){
+					$mask.bind('click', function(){
 						$mask.hide();
 						$slideForm.hide();
 					});
@@ -386,7 +354,7 @@
 					});
 
 					//确认购买
-					$buyConfirm.bind('touchend', function(){
+					$buyConfirm.bind('click', function(){
 					    $mask.click();
 					    window.location.href = 'pay.html';
 					    $.ajax({
@@ -394,29 +362,13 @@
 					        type: 'post',
 					        dataType: 'json',
 					        data: {
-					            //这里的参数根据需要选择传递
-                                sum: $cost.val(),
-                                number: $number.val()
+                                sum: $cost.val()
 					        },
 					        success: function(){
 
 					        }
 					    });
 					});
-
-					//增加按钮
-					$inputCount.on('touchend', '.btn-plus', function(){
-					    var $input = $inputCount.find('input[type=number]');
-					    $input.val( parseInt( $input.val() ) + 1 );
-					});
-
-					//减少按钮
-                    $inputCount.on('touchend', '.btn-minus', function(){
-                        var $input = $inputCount.find('input[type=number]');
-                        if( parseInt( $input.val() ) > 0 ){
-                            $input.val( parseInt( $input.val() ) - 1 );
-                        }
-                    });
 				}
 
 				//初始化iScroll插件

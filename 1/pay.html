@@ -85,14 +85,13 @@
             <div class="xc-control-content">
                 <div class="select-wrap">
                     <select class="select-group" id="pay_attach" name="pay_attach">
-                        <option value=1 data-breaks=20>选择红包或加息券</option>
-                        <option value=2 data-breaks=50>选择红包或加息券</option>
-                        <option value=3 data-breaks=150>选择红包或加息券</option>
+                        <option value=1>选择红包或加息券</option>
+                        <option value=2>选择红包或加息券</option>
                     </select>
                 </div>
             </div>
             <div class="row-block">
-                <span class="label">减免：￥<em id="breaks">20</em></span>
+                <span class="label">减免：￥122</span>
             </div>
             <div class="row-block">
                  <span>支付金额：￥1000</span>
@@ -107,9 +106,7 @@
         <script>
             $(function(){
                 var $payBtn = $("#pay_btn"),
-                    $payAttach = $("#pay_attach"),
-                    $breaks = $("#breaks");
-
+                    $payAttach = $("#pay_attach");
                 init();
 
                 function init(){
@@ -117,12 +114,6 @@
                 }
 
                 function bind(){
-                    //红包下拉框
-                    $payAttach.bind('change', function(){
-                        $breaks.text( $payAttach.find('option[value="' + $payAttach.val() + '"]').attr('data-breaks') );
-                    });
-
-                    //支付
                     $payBtn.bind('click', function(){
                         $.ajax({
                         	type: "post",
