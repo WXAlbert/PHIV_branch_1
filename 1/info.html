@@ -7,9 +7,9 @@
 		<title>中普投资</title>
 		<link rel="stylesheet" type="text/css" href="css/init-mobi.css"/>
 		<link rel="stylesheet" type="text/css" href="css/resources.css"/>
-		<link rel="stylesheet" type="text/css" href="js/iscroll/scrollbar.css"/>
+<!--		<link rel="stylesheet" type="text/css" href="js/iscroll/scrollbar.css"/>-->
 		<style>
-			body{background-color: #29323e;}
+			body{height: auto; background-color: #29323e;}
 
 			/*导航*/
 			.xc-bar-nav{}
@@ -60,8 +60,9 @@
 			#pullUp, #pullDown{width: 12em; margin: 0 auto; line-height: none; background: none; border: none; text-align: center;}
 			/* iscroll插件 listview样式 end*/
 
-			#product_info{background:-webkit-linear-gradient(top, #8fc21f,  #8fc21f  32%, #fff 55%); background-repeat:no-repeat;}
-			#buy_info.list-item{margin-top: 40px; padding-top: 0; background-color: #fff;}
+            .list-item{overflow: hidden; padding-bottom: 40px;}
+			#product_info{padding-top: 40px; background:-webkit-linear-gradient(top, #8fc21f,  #8fc21f  32%, #fff 60%); background-repeat:no-repeat;}
+			#buy_info.list-item{/*margin-top: 40px; */padding-top: 0; background-color: #fff;}
 
 			.xc-container{padding-bottom: 44px;}
 			.xc-table-view-cell{padding: 0; border-top: solid 2px #8fc21f; border-bottom: solid 10px #f5f5f5;}
@@ -98,7 +99,7 @@
 	</head>
 
 	<body>
-		<header id="topBar" class="xc-bar xc-bar-nav">
+		<!--<header id="topBar" class="xc-bar xc-bar-nav">
 			<a class="xc-btn-nav xc-pull-left" href="javascript:history.back();">
 				<i class="xc-icon icon-arrow-left"></i>
 				<span class="xc-nav-label">车辆抵押标的</span>
@@ -106,167 +107,158 @@
 			<div class="xc-title" style="display: none;">
 				车辆抵押标的
 			</div>
-		</header>
+		</header>-->
 
-		<div id="scroller_wrapper" class="xc-container">
-			<div id="scroller">
-				<div id="pullDown">
-					<span class="ui-icon pullDownIcon"></span><span class="pullDownLabel">查看产品详情</span>
-				</div>
+                <ul id="listView" class="list-view">
+                        <li id="product_info" class="list-item">
+                            <div id="yield" class="para-group">
+                                <p class="para-v">18<b>%</b></p>
+                                <p class="para-k">
+                                    <i class="xc-icon icon-rmb"></i>
+                                    <span class="label">预期年化收益</span>
+                                </p>
+                                <canvas width="300" height="300" data-percent="0.18"></canvas>
+                            </div>
 
-				<ul id="listView" class="list-view">
-						<li id="product_info" class="list-item">
-							<div id="yield" class="para-group">
-								<p class="para-v">18<b>%</b></p>
-								<p class="para-k">
-									<i class="xc-icon icon-rmb"></i>
-									<span class="label">预期年化收益</span>
-								</p>
-								<canvas width="300" height="300" data-percent="0.18"></canvas>
-							</div>
+                            <div id="para">
+                                <div class="para-group">
+                                    <p class="para-v"><em>3</em><span>个月</span></p>
+                                    <p class="para-k">期限</p>
+                                </div>
+                                <div class="para-group">
+                                    <p class="para-v"><em>100</em><span>元</span></p>
+                                    <p class="para-k">起投</p>
+                                </div>
+                                <div class="para-group">
+                                    <p class="para-v"><span>全额担保</span></p>
+                                    <p class="para-k">担保</p>
+                                </div>
+                            </div>
 
-							<div id="para">
-								<div class="para-group">
-									<p class="para-v"><em>3</em><span>个月</span></p>
-									<p class="para-k">期限</p>
-								</div>
-								<div class="para-group">
-									<p class="para-v"><em>100</em><span>元</span></p>
-									<p class="para-k">起投</p>
-								</div>
-								<div class="para-group">
-									<p class="para-v"><span>全额担保</span></p>
-									<p class="para-k">担保</p>
-								</div>
-							</div>
+                            <div id="progress">
+                                <p class="rate">75%</p>
+                                <div class="xc-progress-bar clearfix">
+                                    <b class="fr" style="width: 75%;"></b>
+                                </div>
+                                <div class="fl para-group">
+                                    <p class="para-v">18,000,000</p>
+                                    <p class="para-k">项目总额</p>
+                                </div>
+                                <div class="fr para-group">
+                                    <p class="para-v">5,000,000</p>
+                                    <p class="para-k">剩余金额</p>
+                                </div>
+                            </div>
 
-							<div id="progress">
-								<p class="rate">75%</p>
-								<div class="xc-progress-bar clearfix">
-									<b class="fr" style="width: 75%;"></b>
-								</div>
-								<div class="fl para-group">
-									<p class="para-v">18,000,000</p>
-									<p class="para-k">项目总额</p>
-								</div>
-								<div class="fr para-group">
-									<p class="para-v">5,000,000</p>
-									<p class="para-k">剩余金额</p>
-								</div>
-							</div>
+                            <div id="remark">
+                                <span class="label">还款方式 | </span>
+                                <span>一次性还本付息</span>
+                                <a id="protocol" class="fr" href="#">查看协议范本</a>
+                            </div>
+                        </li>
 
-							<div id="remark">
-								<span class="label">还款方式 | </span>
-								<span>一次性还本付息</span>
-								<a id="protocol" class="fr" href="#">查看协议范本</a>
-							</div>
-						</li>
+                        <li id="buy_info" class="list-item">
+                            <div class="topbar">
+                                <nav id="nav" class="xc-segmented-control">
+                                    <li class="xc-current"><a href="#section_1">投资保障</a></li>
+                                    <li><a href="#section_2">借款人信息</a></li>
+                                    <li><a href="#section_3">购买列表</a></li>
+                                </nav>
+                            </div>
 
-						<li id="buy_info" class="list-item hide">
-							<div class="topbar">
-								<nav id="nav" class="xc-segmented-control">
-									<li class="xc-current"><a href="#section_1">投资保障</a></li>
-									<li><a href="#section_2">借款人信息</a></li>
-									<li><a href="#section_3">购买列表</a></li>
-								</nav>
-							</div>
+                            <div id="container" class="xc-segmented-content">
+                                <div class="xc-control-content" id="section_1">
+                                    <p class="xc-icon-label ">
+                                        <i class="xc-icon icon-protect"></i><span class="xc-label">三重保障方式</span>
+                                    </p>
+                                    <section>
+                                        <h3 class="section-title">第一层</h3>
+                                        <p class="section-content">中普的贷款风控审查极为严格，让平台的标的安全更有保障，对每位借款人进行反复校验。让标的更有保障。</p>
+                                    </section>
+                                    <section>
+                                        <h3 class="section-title">第二层</h3>
+                                        <p class="section-content">如果借款用户出现逾期，平台将在第一时间启用风险保障金对理财用户进行先行赔付， 保障每一位理财户的资金安全。</p>
+                                    </section>
+                                    <section>
+                                        <h3 class="section-title">第三层</h3>
+                                        <p class="section-content">如果风险保障金短缺，将采用担保公司赔付机制，拥有雄厚实力的实业担保公司将对我们平台出现的逾期与坏账进行赔付，这是同类P2P公司所没有的赔付环节，真正保障理财人的利益。</p>
+                                    </section>
+                                </div>
+                                <div class="xc-control-content section" id="section_2" style="display: none;">
+                                    <p class="xc-icon-label ">
+                                        <i class="xc-icon icon-person"></i><span class="xc-label">个人基本信息</span>
+                                    </p>
+                                    <table class="person-info">
+                                        <tr>
+                                            <td><span class="key">性别：</span><span class="value">女</span></td>
+                                            <td><span class="key">年龄：</span><span class="value">36岁</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="key">学历：</span><span class="value">大专或本科</span></td>
+                                            <td><span class="key">婚姻状况：</span><span class="value">已婚</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="key">月收入(元)：</span><span class="value">5000</span></td>
+                                            <td><span class="key">邮箱：</span><span class="value">未填写</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="key">所属客服：</span><span class="value">为指定</span></td>
+                                            <td><span class="key">是否购车：</span><span class="value">未填写</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="key">职位：</span><span class="value">个体</span></td>
+                                            <td><span class="key">户籍所在地：</span><span class="value">山东省烟台</span></td>
+                                        </tr>
+                                    </table>
+                                    <section>
+                                        <h3 class="section-title">借款用途</h3>
+                                        <p class="section-content">房屋装修</p>
+                                    </section>
+                                    <section>
+                                        <h3 class="section-title">借款说明</h3>
+                                        <p class="section-content">
+                                            重庆锦通建设（集团）有限公司： 
+                                                      兹由于我司果园港立交收费管理用房项目追赶工期，所需资金匮乏。现特向集团公司申请借款叁拾万圆整，此款定于2013年10月22日还清此款项。  
+                                            特此说明  
 
-							<div id="container" class="xc-segmented-content">
-								<div class="xc-control-content" id="section_1">
-									<p class="xc-icon-label ">
-										<i class="xc-icon icon-protect"></i><span class="xc-label">三重保障方式</span>
-									</p>
-									<section>
-										<h3 class="section-title">第一层</h3>
-										<p class="section-content">中普的贷款风控审查极为严格，让平台的标的安全更有保障，对每位借款人进行反复校验。让标的更有保障。</p>
-									</section>
-									<section>
-										<h3 class="section-title">第二层</h3>
-										<p class="section-content">如果借款用户出现逾期，平台将在第一时间启用风险保障金对理财用户进行先行赔付， 保障每一位理财户的资金安全。</p>
-									</section>
-									<section>
-										<h3 class="section-title">第三层</h3>
-										<p class="section-content">如果风险保障金短缺，将采用担保公司赔付机制，拥有雄厚实力的实业担保公司将对我们平台出现的逾期与坏账进行赔付，这是同类P2P公司所没有的赔付环节，真正保障理财人的利益。</p>
-									</section>
-								</div>
-								<div class="xc-control-content section" id="section_2" style="display: none;">
-									<p class="xc-icon-label ">
-										<i class="xc-icon icon-person"></i><span class="xc-label">个人基本信息</span>
-									</p>
-									<table class="person-info">
-										<tr>
-											<td><span class="key">性别：</span><span class="value">女</span></td>
-											<td><span class="key">年龄：</span><span class="value">36岁</span></td>
-										</tr>
-										<tr>
-											<td><span class="key">学历：</span><span class="value">大专或本科</span></td>
-											<td><span class="key">婚姻状况：</span><span class="value">已婚</span></td>
-										</tr>
-										<tr>
-											<td><span class="key">月收入(元)：</span><span class="value">5000</span></td>
-											<td><span class="key">邮箱：</span><span class="value">未填写</span></td>
-										</tr>
-										<tr>
-											<td><span class="key">所属客服：</span><span class="value">为指定</span></td>
-											<td><span class="key">是否购车：</span><span class="value">未填写</span></td>
-										</tr>
-										<tr>
-											<td><span class="key">职位：</span><span class="value">个体</span></td>
-											<td><span class="key">户籍所在地：</span><span class="value">山东省烟台</span></td>
-										</tr>
-									</table>
-									<section>
-										<h3 class="section-title">借款用途</h3>
-										<p class="section-content">房屋装修</p>
-									</section>
-									<section>
-										<h3 class="section-title">借款说明</h3>
-										<p class="section-content">
-											重庆锦通建设（集团）有限公司： 
-											          兹由于我司果园港立交收费管理用房项目追赶工期，所需资金匮乏。现特向集团公司申请借款叁拾万圆整，此款定于2013年10月22日还清此款项。  
-											特此说明  
+                                                                       重庆锦通建设（集团）有限公司一分公司 
+                                              
+                                                                                                                 2013-10-16
+                                        </p>
+                                    </section>
+                                </div>
+                                <div class="xc-control-content section" id="section_3" style="display: none;">
+                                    <table class="report-table">
+                                        <thead>
+                                            <th><span class="section-title">投标人</span></th>
+                                            <th><span class="section-title">投标金额</span></th>
+                                            <th><span class="section-title">投标时间</span></th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>yuanyuan</td>
+                                                <td>￥200,000,00元</td>
+                                                <td>2015.09.09 14:30</td>
+                                            </tr>
+                                            <tr>
+                                                <td>yuanyuan</td>
+                                                <td>￥200,000,00元</td>
+                                                <td>2015.09.09 14:30</td>
+                                            </tr>
+                                            <tr>
+                                                <td>yuanyuan</td>
+                                                <td>￥200,000,00元</td>
+                                                <td>2015.09.09 14:30</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </li>
+                </ul>
 
-											                           重庆锦通建设（集团）有限公司一分公司 
-											  
-											                                                                     2013-10-16
-										</p>
-									</section>
-								</div>
-								<div class="xc-control-content section" id="section_3" style="display: none;">
-									<table class="report-table">
-										<thead>
-											<th><span class="section-title">投标人</span></th>
-											<th><span class="section-title">投标金额</span></th>
-											<th><span class="section-title">投标时间</span></th>
-										</thead>
-										<tbody>
-											<tr>
-												<td>yuanyuan</td>
-												<td>￥200,000,00元</td>
-												<td>2015.09.09 14:30</td>
-											</tr>
-											<tr>
-												<td>yuanyuan</td>
-												<td>￥200,000,00元</td>
-												<td>2015.09.09 14:30</td>
-											</tr>
-											<tr>
-												<td>yuanyuan</td>
-												<td>￥200,000,00元</td>
-												<td>2015.09.09 14:30</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</li>
-				</ul>
 
-				<div id="pullUp">
-					<span class="ui-icon pullUpIcon"></span><span class="pullUpLabel">查看购买详情</span>
-				</div>
-			</div>
-		</div>
+
 
 		<footer class="xc-bar xc-bar-control">
 			<a id="buy_btn" class="control-btn" href="#">购买</a>
@@ -320,7 +312,7 @@
 		<div class="xc-mask"></div>
 		<!--<script src="js/jq.mobi.min.js" type="text/javascript" charset="utf-8"></script>-->
 		<script src="js/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/iscroll/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<!--		<script src="js/iscroll/iscroll.js" type="text/javascript" charset="utf-8"></script>-->
 		<script type="text/javascript">
 			$(function(){
 				var paraGroup = document.querySelectorAll(".para-group"),
@@ -350,16 +342,11 @@
 				function init(){
 					$listItem.css('minHeight', window.innerHeight - 40);
 					showPies();
-					initScroll();
+					//initScroll();
 					bind();
 				}
 
 				function bind(){
-					//初始化绑定iScroll控件
-					document.addEventListener('touchmove', function(e) {
-						e.preventDefault();
-					}, false);
-					//
 					$protocol.bind('touchstart', function(){
 						$protocol.addClass('act');
 					});
@@ -434,6 +421,11 @@
 
 				//初始化iScroll插件
 				function initScroll() {
+				    //初始化绑定iScroll控件
+                    document.addEventListener('touchmove', function(e) {
+                        e.preventDefault();
+                    }, false);
+
 					pullDownEl = document.getElementById('pullDown');
 					pullDownOffset = pullDownEl.offsetHeight;
 					pullUpEl = document.getElementById('pullUp');
