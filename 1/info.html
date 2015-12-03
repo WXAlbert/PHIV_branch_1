@@ -292,7 +292,7 @@
             </div>
             <div>
                 <span>可投资份数：</span>
-                <span class="ft-red"><span id="unit"></span><em>份</em></span>
+                <span class="ft-red"><span id="unit"></span><em>74353份</em></span>
             </div>
             <div class="xc-input-group">
                 <span class="fl ft-b label">输入购买份数：</span>
@@ -355,7 +355,7 @@
 					});
 
 					//选项卡切换
-					$navItem.bind('click', function(e){
+					$navItem.bind('touchend', function(e){
 						e.preventDefault();
 						var $this = $(this),
 							id = $this.attr('href').slice(1);
@@ -366,14 +366,14 @@
 					});
 
 					//点击购买按钮弹出输入框
-					$buyBtn.bind('click', function(){
+					$buyBtn.bind('touchend', function(){
 						console.log('buy');
 						$mask.show();
 						$slideForm.slideDown();
 					});
 
 					//点击遮罩层隐藏
-					$mask.bind('click', function(){
+					$mask.bind('touchend', function(){
 						$mask.hide();
 						$slideForm.hide();
 					});
@@ -386,7 +386,7 @@
 					});
 
 					//确认购买
-					$buyConfirm.bind('click', function(){
+					$buyConfirm.bind('touchend', function(){
 					    $mask.click();
 					    window.location.href = 'pay.html';
 					    $.ajax({
@@ -405,19 +405,18 @@
 					});
 
 					//增加按钮
-					$inputCount.on('click', '.btn-plus', function(){
+					$inputCount.on('touchend', '.btn-plus', function(){
 					    var $input = $inputCount.find('input[type=number]');
 					    $input.val( parseInt( $input.val() ) + 1 );
 					});
 
 					//减少按钮
-                    $inputCount.on('click', '.btn-minus', function(){
+                    $inputCount.on('touchend', '.btn-minus', function(){
                         var $input = $inputCount.find('input[type=number]');
                         if( parseInt( $input.val() ) > 0 ){
                             $input.val( parseInt( $input.val() ) - 1 );
                         }
                     });
-
 				}
 
 				//初始化iScroll插件
